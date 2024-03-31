@@ -1,19 +1,20 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { UsuarioComponent } from './usuario/usuario.component';
-import { RecuperarPasswordComponent } from './recuperar-password/recuperar-password.component';
 
 export const routes: Routes = [
     {
-        path: 'login', component: LoginComponent
+        path: 'login', loadComponent: () => import('./login/login.component')
     },
 
     {
-        path: 'usuario', component: UsuarioComponent
+        path: 'usuario', loadComponent: ()=> import('./usuario/usuario.component')
     },
 
     {
-        path: 'Recuperar-password', component: RecuperarPasswordComponent
+        path: 'Recuperar-password', loadComponent: ()=> import('./recuperar-password/recuperar-password.component')
+    },
+    
+    {
+        path: 'contactos', loadComponent: ()=> import('./contactos/contactos.component')
     },
 
     {

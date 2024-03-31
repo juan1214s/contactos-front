@@ -22,7 +22,7 @@ public crearUsuario(dataUsuario: Usuario): Observable<any> {
     password: dataUsuario.password
   };
 
-  return this.__httClient.post<any>(`${this._endPoint}`, body);
+  return this.__httClient.post<void>(`${this._endPoint}`, body);
 }
 
 

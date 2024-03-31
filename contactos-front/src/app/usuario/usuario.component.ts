@@ -14,7 +14,7 @@ import swal from 'sweetalert';
   templateUrl: './usuario.component.html',
   styleUrl: './usuario.component.css'
 })
-export class UsuarioComponent {
+export default class UsuarioComponent {
 private readonly _formBuilder = inject(FormBuilder);
 private readonly _usuarioService = inject(UsuarioService);
 private readonly _router = inject(Router)
