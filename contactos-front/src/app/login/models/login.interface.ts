@@ -5,3 +5,7 @@ export interface Token {
     message:       string;
 }
 
+export interface LoginDto{
+    correoElectronico: string
+    password: string
+}

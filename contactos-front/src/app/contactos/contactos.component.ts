@@ -15,7 +15,11 @@ private readonly _contactosService = inject(ContactosService);
 contactos = this._contactosService.contactos
 
 constructor(){
-this._contactosService.obtenerContactos(31)
+  //invierte el valor, porq se guarda en string y lo necesito convertir en numero
+  const idUsuario = parseInt(localStorage.getItem('idUsuario') || '0');
+
+  //llamo la funcion y envio el id del usuario
+  this._contactosService.obtenerContactos(idUsuario)
 }
 
 }

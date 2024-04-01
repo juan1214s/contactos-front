@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, input, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ContactosDto } from '../contactos/model/contactos.interface';
-import { Observable, tap } from 'rxjs';
+import {tap } from 'rxjs';
 
 
 @Injectable({
@@ -15,11 +15,9 @@ export class ContactosService {
   private token = 'token';
   public contactos = signal<ContactosDto[]>([]);
 
-
   private obtenerToken(): string | null {
     return localStorage.getItem(this.token);
   }
-
 
   public obtenerContactos(id: number): any {
     const token = this.obtenerToken();
