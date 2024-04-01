@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { Token } from '../login/models/login.interface'; 
+import { LoginDto, TokenDto } from '../login/models/login.interface'; 
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,11 @@ import { Token } from '../login/models/login.interface';
 export class LoginService {
 
   private readonly _endPoint = environment.loginApiUrl;
+  private readonly _httpClient = inject(HttpClient)
 
- private readonly _httpClient = inject(HttpClient)
-
-//indica q devuelve el tipo Token
-public validarUsuario(correoElectronico: string, password: string): Observable<Token> {
-    const body = { correoElectronico, password };
-    return this._httpClient.post<Token>(`${this._endPoint}`, body);
+//indica q devuelve el tipo Token y le paso un tipado en la data
+public validarUsuario(data: LoginDto): Observable<TokenDto> {
+    return this._httpClient.post<TokenDto>(`${this._endPoint}`, data);
   }
   
 }
