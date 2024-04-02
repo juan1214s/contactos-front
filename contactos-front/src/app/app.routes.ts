@@ -18,6 +18,7 @@ export const routes: Routes = [
     },
 
     {
+        //va ser la ruta pricipal
         path: '', redirectTo: 'login', pathMatch: 'full'
     }
 ];

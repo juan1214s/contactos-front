@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../api/login.service';
 import swal from 'sweetalert';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { LoginDto } from './models/login.interface';
 
 @Component({
@@ -12,27 +11,15 @@ import { LoginDto } from './models/login.interface';
   standalone: true,
   imports: [RouterLink, ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-   animations: [
-    trigger('fade', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('500ms', style({ opacity: 1 })),
-      ]),
-      transition(':leave', [
-        animate('500ms', style({ opacity: 0 })),
-      ]),
-    ]),
-  ],
+  styleUrls: ['./login.component.css']
 })
-
 
 export default class LoginComponent {
 
- private readonly _loginService = inject(LoginService);
- private readonly _formBuilder = inject(FormBuilder);
- private readonly _route = inject(Router);
- 
+private readonly _loginService = inject(LoginService);
+private readonly _formBuilder = inject(FormBuilder);
+private readonly _route = inject(Router);
+
   formGroup: FormGroup = this._formBuilder.group({
     email: '',
     password: ''
