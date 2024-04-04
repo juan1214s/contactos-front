@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, input, signal } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { ContactosDto } from '../contactos/model/contactos.interface';
-import {tap } from 'rxjs';
+import { ContactosDto, CrearContactosDto } from '../contactos/model/contactos.interface';
+import {catchError, Observable, tap } from 'rxjs';
 
 
 @Injectable({
@@ -34,6 +34,20 @@ export class ContactosService {
     } else {
       throw new Error('Inicia sesion de nuevo');
     }
+  }
+
+  crearContacto(id: number, data: CrearContactosDto): Observable<any> {
+    const token = this.obtenerToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this._http.post<CrearContactosDto>(`${this._endPoint}/${id}`, data, { headers }).pipe(
+      catchError(error => {
+        console.error('Error al crear el contacto:', error);
+        throw error; 
+      })
+    );
   }
 
 

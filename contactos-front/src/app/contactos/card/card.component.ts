@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
+import { ContactosService } from '../../api/contactos.service';
+import { ContactosDto } from '../model/contactos.interface';
 
 @Component({
   selector: 'app-card',
@@ -8,5 +10,7 @@ import { Component } from '@angular/core';
   styleUrl: './card.component.css'
 })
 export class CardComponent {
+
+  contacto = input.required<ContactosDto>()
 
 }

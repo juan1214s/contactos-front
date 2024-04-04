@@ -4,3 +4,9 @@ export interface ContactosDto {
     numero:            string;
     correoElectronico: string;
 }
+
+export interface CrearContactosDto{
+    nombre:            string;
+    numero:        string;
+    correoElectronico: string;
+}
