@@ -21,9 +21,9 @@ import swal from 'sweetalert';
 })
 export default class ContactosComponent{
 
-private readonly ContactosService = inject(ContactosService);
 private readonly _formBuilder = inject(FormBuilder)
 private readonly _contactosService = inject(ContactosService);
+//aca accedo a la signal q se encuentra en contactosService
 contactos = this._contactosService.contactos
 
 constructor(){
@@ -31,7 +31,8 @@ constructor(){
   const idUsuario = parseInt(localStorage.getItem('idUsuario') || '0');
 
   //llamo la funcion y envio el id del usuario
-  this._contactosService.obtenerContactos(idUsuario)
+  this._contactosService.obtenerContactos(idUsuario);
+
 }
 
 showModal = false;
@@ -61,6 +62,12 @@ enviarDatos(){
   const numero: string= this.formGroup.get('numero')?.value 
   const correoElectronico: string= this.formGroup.get('email')?.value 
 
+  if(!nombre || !numero || !correoElectronico){
+    swal('!Error', 'Todos los campos son necesarios', 'error');
+    return
+  }
+
+  //aca se conviere a un objeto los inpust del form
   const contactoData: CrearContactosDto = {
     nombre,
     numero,
@@ -69,12 +76,14 @@ enviarDatos(){
 
   this._contactosService.crearContacto(idUsuario,contactoData).pipe(
     catchError(error => {
-      swal('!ERROR', 'Contacto crado', 'error');
+      swal('!ERROR', 'Contacto no credo', 'error');
       console.error('Error al crear el contacto en el componente:', error);
+      this.closeModal();
       return[]
     })
   ).subscribe(response => {
-    swal('!EXITO', 'Contacto credo', 'success');
+    swal('!Exito', 'Se ha creado el contacto', 'success');
+    this.formGroup.reset();
   })
 }
 
