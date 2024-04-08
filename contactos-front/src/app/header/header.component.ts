@@ -19,24 +19,15 @@ export class HeaderComponent {
       title: "Exito!",
       text: "La sesion se cerro",
       icon: "success",
-      buttons: {
-        confirm: {
-          text: "Aceptar",
-          value: true
-        }
-      }
-      //demora la transición a la siguiente pagina
-    }).then((value) => {
-      if (value) {
-        setTimeout(()=>{
-         this.router.navigate(['/login'])
-        },1000);
+      timer: 2000,
+    })
 
-        localStorage.removeItem('token');
-        localStorage.removeItem('idUsuario');
-        this.router.navigate(['/login'])
-      }
-    });
+    setTimeout(()=>{
+      this.router.navigate(['/login'])
+    },1500);
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('idUsuario');
    
   }
 

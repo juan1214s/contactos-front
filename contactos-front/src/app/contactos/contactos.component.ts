@@ -20,11 +20,13 @@ import swal from 'sweetalert';
   styleUrls: ['./contactos.component.css']
 })
 export default class ContactosComponent{
-
+  
 private readonly _formBuilder = inject(FormBuilder)
 private readonly _contactosService = inject(ContactosService);
 //aca accedo a la signal q se encuentra en contactosService
-contactos = this._contactosService.contactos
+contactos = this._contactosService.contactos;
+//esta varible recibe el id del usuario del componente hijo card
+public idUsuario = 0
 
 constructor(){
   //invierte el valor, porq se guarda en string y lo necesito convertir en numero
@@ -35,6 +37,7 @@ constructor(){
 
 }
 
+//esta es la varible q permite q se muestra la ventana modal
 showModal = false;
 
 openModal(): void {
@@ -52,7 +55,7 @@ formGroup: FormGroup = this._formBuilder.group({
  
 });
 
-enviarDatos(){
+public enviarDatos(){
     //invierte el valor, porq se guarda en string y lo necesito convertir en numero
     const idUsuario = parseInt(localStorage.getItem('idUsuario') || '0');
 
@@ -84,6 +87,20 @@ enviarDatos(){
   ).subscribe(response => {
     swal('!Exito', 'Se ha creado el contacto', 'success');
     this.formGroup.reset();
+  })
+}
+
+public obtenerId(id: number){
+  this.idUsuario = id
+  this._contactosService.deleteContacto(this.idUsuario)
+  .pipe(
+    catchError(error => {
+      swal('!ERROR', 'El contacto no se ha podido eliminar', 'error');
+      console.error(`Error en el servidor ${error.message}`);
+      return[]
+    })
+  ).subscribe(response =>{
+    swal('!Exito', 'Se ha borrado correctamente el contacto', 'success');
   })
 }
 

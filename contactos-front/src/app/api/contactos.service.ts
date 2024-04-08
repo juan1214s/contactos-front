@@ -36,7 +36,7 @@ export class ContactosService {
     }
   }
 
-  crearContacto(id: number, data: CrearContactosDto): Observable<any> {
+ public crearContacto(id: number, data: CrearContactosDto): Observable<any> {
     const token = this.obtenerToken();
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
@@ -44,12 +44,26 @@ export class ContactosService {
 
     return this._http.post<CrearContactosDto>(`${this._endPoint}/${id}`, data, { headers }).pipe(
       catchError(error => {
-        console.error('Error al crear el contacto:', error);
+        console.error(`Error al crear el contacto: ${error}`);
         throw error; 
       })
     );
   }
 
+  public deleteContacto(id: number): Observable<any>{
+    const token = this.obtenerToken();
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this._http.delete<number>(`${this._endPoint}/${id}`, {headers})
+    .pipe(
+      catchError(error => {
+        console.log(`Ocurrio un error en el servidor: ${error.message}`)
+        throw error
+      })
+    )
+  }
 
 
 }

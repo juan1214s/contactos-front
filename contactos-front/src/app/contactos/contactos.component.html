@@ -1,4 +1,4 @@
-@if (contactos()) {
+@if (contactos().length > 0) {
   <app-header></app-header>
   <app-buscador />
 
@@ -13,7 +13,7 @@
       <button class="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-gray-800">Agregar Contacto</button>
     </div>
     
-
+<!--si es estado cambia a true muestra el div-->
   @if (showModal) {
     <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
@@ -58,15 +58,17 @@
     
     
     <div class="container px-5 py-24 mx-auto">
-      
       <div  class="flex flex-wrap -m-4">
-        <!--se pasa el nombre del input -->
+        <!--se pasa el nombre del input y el Output desde el hijo q pasa el id llamando al la funcion del hijo -->
         @for (contacto of contactos(); track $index) {
-          <app-card [contacto]="contacto"></app-card>
+          <app-card
+           [contacto]="contacto"
+           (enviarId)="obtenerId($event)"
+           ></app-card>
         }
-        
       </div>
     </div>
+
   </section>
   <app-footer/>
   
