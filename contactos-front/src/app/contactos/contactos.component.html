@@ -60,7 +60,7 @@
     <div class="container px-5 py-24 mx-auto">
       <div  class="flex flex-wrap -m-4">
         <!--se pasa el nombre del input y el Output desde el hijo q pasa el id llamando al la funcion del hijo -->
-        @for (contacto of contactos(); track $index) {
+        @for (contacto of contactos(); track contacto.id) {
           <app-card
            [contacto]="contacto"
            (enviarId)="obtenerId($event)"

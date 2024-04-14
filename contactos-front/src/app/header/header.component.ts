@@ -23,7 +23,8 @@ export class HeaderComponent {
     })
 
     setTimeout(()=>{
-      this.router.navigate(['/login'])
+      //evita q se recargue la pagina al dirigirme a la url
+      this.router.navigate(['/login'], {replaceUrl: true})
     },1500);
 
     localStorage.removeItem('token');

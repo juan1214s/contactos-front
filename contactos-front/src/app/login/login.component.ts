@@ -55,7 +55,8 @@ private readonly _route = inject(Router);
         }).then((value) => {
           if (value) {
             setTimeout(()=>{
-              this._route.navigate(['contactos']);
+              //evita q se recargue la pagina al ir a esa ruta
+              this._route.navigate(['contactos'], {replaceUrl: true});
             },1000)
           }
         });

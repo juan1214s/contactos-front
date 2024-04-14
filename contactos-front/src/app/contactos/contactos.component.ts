@@ -24,7 +24,7 @@ export default class ContactosComponent{
 private readonly _formBuilder = inject(FormBuilder)
 private readonly _contactosService = inject(ContactosService);
 //aca accedo a la signal q se encuentra en contactosService
-contactos = this._contactosService.contactos;
+contactos = this._contactosService.contactos
 //esta varible recibe el id del usuario del componente hijo card
 public idUsuario = 0
 
@@ -90,7 +90,7 @@ public enviarDatos(){
   })
 }
 
-public obtenerId(id: number){
+public obtenerId(id: number): void{
   this.idUsuario = id
   this._contactosService.deleteContacto(this.idUsuario)
   .pipe(
@@ -101,6 +101,9 @@ public obtenerId(id: number){
     })
   ).subscribe(response =>{
     swal('!Exito', 'Se ha borrado correctamente el contacto', 'success');
+    setTimeout(()=> {
+      window.location.reload();
+    },1000)
   })
 }
 
