@@ -1,16 +1,18 @@
 <div class="flex justify-center w-full mt-10">
     <div class="relative w-[40rem]">
+      <form [formGroup]="formGrup">
         <label for="Search" class="sr-only"> Buscar.. </label>
       
         <input
           type="text"
           id="Search"
           placeholder="Buscar..."
+          formControlName="nombre"
           class="w-full rounded-md border-gray-300 border-2 focus:border-blue-500m pl-5 py-2.5 pe-10 shadow-sm sm:text-sm"
         />
       
         <span class="absolute inset-y-0 end-0 grid w-10 place-content-center">
-          <button type="button" class="text-gray-600 hover:text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring focus:border-blue-300">
+          <button (click)="getBuscador()" type="button" class="text-gray-600 hover:text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring focus:border-blue-300">
             <span class="sr-only ">Search</span>
       
             <svg
@@ -29,5 +31,13 @@
             </svg>
           </button>
         </span>
+      </form>
     </div>
+  
+ 
+  
+    
+
+      
+    
 </div>

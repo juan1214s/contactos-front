@@ -1,4 +1,4 @@
-import { Component, inject} from '@angular/core';
+import { Component, inject, OnInit} from '@angular/core';
 import { ContactosService } from "../api/contactos.service"
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
@@ -19,7 +19,7 @@ import swal from 'sweetalert';
   templateUrl: './contactos.component.html',
   styleUrls: ['./contactos.component.css']
 })
-export default class ContactosComponent{
+export default class ContactosComponent implements OnInit{
   
 private readonly _formBuilder = inject(FormBuilder)
 private readonly _contactosService = inject(ContactosService);
@@ -28,7 +28,8 @@ contactos = this._contactosService.contactos
 //esta varible recibe el id del usuario del componente hijo card
 public idUsuario = 0
 
-constructor(){
+//cada vez q se cargue el componente se ejecuta
+ngOnInit():void{
   //invierte el valor, porq se guarda en string y lo necesito convertir en numero
   const idUsuario = parseInt(localStorage.getItem('idUsuario') || '0');
 
@@ -90,6 +91,7 @@ public enviarDatos(){
   })
 }
 
+//elinar contacto
 public obtenerId(id: number): void{
   this.idUsuario = id
   this._contactosService.deleteContacto(this.idUsuario)

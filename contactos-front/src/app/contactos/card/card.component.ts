@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CardComponent {
 
-  //elcomponete padre pasa el objeto con los contactos
+  //el componete padre pasa el objeto con los contactos
   contacto = input.required<ContactosDto>();
   
   //esto envia el id del contacto a el componente padre emite un evento al q se pude suscribir
