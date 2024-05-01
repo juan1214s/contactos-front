@@ -56,9 +56,14 @@ formGroup: FormGroup = this._formBuilder.group({
  
 });
 
+private obternerIdCliente(){
+  //invierte el valor, porq se guarda en string y lo necesito convertir en numero
+  return parseInt(localStorage.getItem('idUsuario') || '0');
+}
+
 public enviarDatos(){
-    //invierte el valor, porq se guarda en string y lo necesito convertir en numero
-    const idUsuario = parseInt(localStorage.getItem('idUsuario') || '0');
+    
+    const idUsuario = this.obternerIdCliente()
 
     //llamo la funcion y envio el id del usuario
     this._contactosService.obtenerContactos(idUsuario)

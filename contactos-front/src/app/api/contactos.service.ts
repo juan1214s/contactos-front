@@ -12,7 +12,7 @@ export class ContactosService {
 
   private readonly _endPoint = environment.contactosApiUrl;
   private readonly _http = inject(HttpClient);
-  private token = 'token';
+  public token = 'token';
   public contactos = signal<ContactosDto[]>([]);
 
   private obtenerToken(): string | null {
@@ -22,18 +22,14 @@ export class ContactosService {
   public obtenerContactos(id: number): any {
     const token = this.obtenerToken();
 
-    if (token) {
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      });
-
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    
       this._http.get<ContactosDto[]>(`${this._endPoint}/${id}`, { headers })
       .pipe(
         tap((contactos: ContactosDto[] )=> this.contactos.set(contactos))
       ).subscribe()
-    } else {
-      throw new Error('Inicia sesion de nuevo');
-    }
   }
 
  public crearContacto(id: number, data: CrearContactosDto): Observable<any> {

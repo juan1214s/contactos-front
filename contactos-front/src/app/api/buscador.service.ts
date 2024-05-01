@@ -1,5 +1,5 @@
-import { Injectable, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { inject, Injectable, signal } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Observable, throwError } from 'rxjs';
@@ -12,12 +12,21 @@ export class BuscadorService {
 
   private readonly _endPoint = environment.buscadorApiUrl;
   public resultado = signal<BuscadorDto[]>([])
-
-  constructor(private readonly _http: HttpClient) {}
+  private token = 'token'
+  private readonly _http = inject(HttpClient)
+  
+  private obtenerToken(): string | null {
+    return localStorage.getItem(this.token);
+  }
 
   buscarContacto(buscador: DataBuscadorDto): Observable<BuscadorDto[]> {
+    const token = this.obtenerToken();
     const {id, nombre} = buscador
-    return this._http.get<BuscadorDto[]>(`${this._endPoint}/${id}?nombre=${nombre}`)
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    
+    return this._http.get<BuscadorDto[]>(`${this._endPoint}/${id}?nombre=${nombre}`,{headers})
       .pipe(
         tap((buscar: BuscadorDto[]) => this.resultado.set(buscar)),
         catchError(error => {

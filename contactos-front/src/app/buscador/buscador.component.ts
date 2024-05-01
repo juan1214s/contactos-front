@@ -21,12 +21,15 @@ formGrup: FormGroup = this._formBuilder.group({
 nombre: ''
 })
 
+private obternerIdCliente(){
+    //invierte el valor, porq se guarda en string y lo necesito convertir en numero
+  return parseInt(localStorage.getItem('idUsuario')  || '0')
+}
+
 public getBuscador(){
   const nombre: string = this.formGrup.get('nombre')?.value
-  const id = 31
-  console.log(id)
-  console.log(nombre)
-
+  const id = this.obternerIdCliente();
+  
   if(!nombre){
     swal('!Error', 'Todos los campos son necesarios', 'error');
     return 
@@ -38,7 +41,7 @@ const dataBuscador: DataBuscadorDto = {
 }
 
 this.buscadorService.buscarContacto(dataBuscador).subscribe(
-  (data)=>console.log(data)
+  // (data)=>console.log(data)
 )
 }
 
