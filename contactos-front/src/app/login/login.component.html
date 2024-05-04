@@ -22,25 +22,22 @@
 									<div class="center-wrap">
 										<div class="section text-center">
 
-											<form [formGroup]="formGroup">
+											<form [formGroup]="formGroup" autocomplete="on"> <!-- Agrega autocomplete="on" al formulario -->
 												<h4 class="mb-4 pb-3">LogIn</h4>
 												<div class="form-group">
-													<input type="email" class="form-style" placeholder="Email" formControlName="email"  autocomplete="email">
+													<input type="email" class="form-style" placeholder="Email" formControlName="email" autocomplete="username"> <!-- Agrega autocomplete="username" al campo de usuario -->
 													<i class="input-icon uil uil-at"></i>
 												</div>
 												<div class="form-group mt-2">
-													<input type="password" class="form-style" placeholder="Contraseña" formControlName="password" autocomplete="current-password">
+													<input type="password" class="form-style" placeholder="Contraseña" formControlName="password" autocomplete="current-password"> <!-- Agrega autocomplete="current-password" al campo de contraseña -->
 													<i class="input-icon uil uil-lock-alt"></i>
 												</div>
 												<button (click)="validarDatos()" class="btn mt-4">Login</button>
-												<p class="mb-0 mt-4 text-center"><a
-														[routerLink]="['/Recuperar-password']" class="link">Olvido su
-														contraseña?</a></p>
-												<p class="mb-0 mt-1 text-center"><a
-														[routerLink]="['/usuario']" class="link">Crea una
-														cuenta</a></p>
+												<p class="mb-0 mt-4 text-center"><a [routerLink]="['/Recuperar-password']" class="link">Olvidó su contraseña?</a></p>
+												<p class="mb-0 mt-1 text-center"><a [routerLink]="['/usuario']" class="link">Crea una cuenta</a></p>
 											</form>
-
+											
+											
 										</div>
 									</div>
 								</div>
